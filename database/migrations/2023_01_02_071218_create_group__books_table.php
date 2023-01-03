@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKelompoksTable extends Migration
+class CreateGroupBooksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateKelompoksTable extends Migration
      */
     public function up()
     {
-        Schema::create('kelompoks', function (Blueprint $table) {
+        Schema::create('group__books', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
-            $table->text('paritra');
+            $table->integer('group_id');
+            $table->integer('book_id');
         });
     }
 
@@ -28,6 +27,6 @@ class CreateKelompoksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kelompoks');
+        Schema::dropIfExists('group__books');
     }
 }

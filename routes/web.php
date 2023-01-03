@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BukuController;
-use App\Http\Controllers\KelompokController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\GroupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +15,18 @@ use App\Http\Controllers\KelompokController;
 |
 */
 
-Route::get('/', [BukuController::class, 'index']);
-Route::get('/getBook', [BukuController::class, 'getBook']);
-Route::get('/kelompok', [KelompokController::class, 'index']);
-Route::post('/tambahKelompok', [KelompokController::class, 'store']);
+Route::get('/', [BookController::class, 'index']);
+Route::get('/getBooks', [BookController::class, 'getBooks']);
+Route::get('/getBook', [BookController::class, 'getBook']);
+Route::get('/viewAddGroup', [GroupController::class, 'index']);
+Route::post('/addGroup', [GroupController::class, 'store']);
+Route::post('/editGroup', [GroupController::class, 'editGroup']);
+Route::get('/viewGroup', [GroupController::class, 'viewGroup']);
+Route::post('/getBooks', [BookController::class, 'getBooks']);
+Route::post('/getGroups', [GroupController::class, 'getGroups']);
+Route::post('/getGroupBook', [GroupController::class, 'getGroupBook']);
+Route::post('/coba', [GroupController::class, 'coba']);
 
-Route::post('/tambahBuku', [BukuController::class, 'store']);
-Route::post('/ubahBuku', [BukuController::class, 'update']);
-Route::post('/hapusBuku', [BukuController::class, 'destroy']);
+Route::post('/addBook', [BookController::class, 'store']);
+Route::post('/editBook', [BookController::class, 'update']);
+Route::post('/deleteBook', [BookController::class, 'destroy']);
