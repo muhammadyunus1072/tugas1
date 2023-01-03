@@ -71,5 +71,143 @@
     </div>
   </div>
 
-  <script src="{!! asset('js/book.js') !!}"></script>
+@endsection
+
+@section('js')
+    <script>
+      $(document).ready(function () {
+      let btnSave = $(".btnSave");
+      let btnEdit = $(".btnEdit");
+      let table = $("#table").DataTable({
+          ajax: {
+              url: "{{ route('book.datatable') }}",
+              type: "GET",
+          },
+          serverSide: true,
+          processing: true,
+          paging: false,
+          searching: false,
+          columns: [
+              { data: "id" },
+              { data: "title" },
+              { data: "description" },
+              { data: "action" },
+          ],
+          columnDefs: [
+              {
+                  searchable: false,
+                  orderable: false,
+                  targets: 0,
+              },
+          ],
+      });
+      table
+          .on("order.dt search.dt", function () {
+              let i = 1;
+
+              table
+                  .cells(null, 0, { search: "applied", order: "applied" })
+                  .every(function (cell) {
+                      this.data(i++);
+                  });
+          })
+          .draw();
+
+      btnEdit.click((e) => {
+          let data = {
+              id: $("#book_id").val(),
+              title: $("#title_edit").val(),
+              description: $("#description_edit").val(),
+          };
+
+          $.ajaxSetup({
+              headers: {
+                  "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+              },
+          });
+
+          $.ajax({
+              type: "POST",
+              url: "{{ route('book.update') }}",
+              data: data,
+              success: (data) => {
+                  table.draw();
+                  $("#modal_edit").modal("hide");
+              },
+          });
+      });
+
+      btnSave.click((e) => {
+          e.preventDefault();
+          let data = {
+              title: $("#title").val(),
+              description: $("#description").val(),
+          };
+
+          $.ajaxSetup({
+              headers: {
+                  "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+              },
+          });
+
+          $.ajax({
+              type: "POST",
+              url: "{{ route('book.store') }}",
+              data: data,
+              success: (data) => {
+                  table.draw();
+                  $("#modal_create").modal("hide");
+              },
+          });
+      });
+      $(document).on("click", ".btnShowModalEdit", (event) => {
+          event.preventDefault();
+
+          $("#modal_edit").modal("show");
+          $("#title_edit").val($(event.target).attr("data-title"));
+          $("#description_edit").val($(event.target).attr("data-description"));
+          $("#book_id").val($(event.target).attr("data-id"));
+      });
+      $(document).on("click", ".btnDelete", (event) => {
+          event.preventDefault();
+          let data = {
+              id: $(event.target).attr("data-id"),
+          };
+          $.ajaxSetup({
+              headers: {
+                  "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+              },
+          });
+
+          $.ajax({
+              type: "POST",
+              url: "{{ route('book.destroy') }}",
+              data: data,
+              success: (data) => {
+                  table.draw();
+              },
+          });
+      });
+  });
+  
+  function coba() {
+      $.ajaxSetup({
+          headers: {
+              "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+          },
+      });
+      $.post(
+          "coba",
+          {
+              name: "yunus",
+              age: "21",
+          },
+          (data) => {
+              console.log(data);
+          }
+      );
+  }
+  coba();
+
+    </script>
 @endsection

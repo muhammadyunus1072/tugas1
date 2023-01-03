@@ -33,7 +33,7 @@ class GroupController extends Controller
             if($group->save()){
                 // return "oke";
                 if(DB::table('group__books')->where('group_id', '=', $request->id)->delete()){
-                    return "ok";
+                    // return "ok";
                 }
                 for($a = 0; $a < count($request->paritra); $a ++){
                     $Group_Book = new Group_Books();

@@ -15,18 +15,17 @@ use App\Http\Controllers\GroupController;
 |
 */
 
-Route::get('/', [BookController::class, 'index']);
-Route::get('/getBooks', [BookController::class, 'getBooks']);
-Route::get('/getBook', [BookController::class, 'getBook']);
-Route::get('/viewAddGroup', [GroupController::class, 'index']);
-Route::post('/addGroup', [GroupController::class, 'store']);
-Route::post('/editGroup', [GroupController::class, 'editGroup']);
-Route::get('/viewGroup', [GroupController::class, 'viewGroup']);
-Route::post('/getBooks', [BookController::class, 'getBooks']);
-Route::post('/getGroups', [GroupController::class, 'getGroups']);
-Route::post('/getGroupBook', [GroupController::class, 'getGroupBook']);
-Route::post('/coba', [GroupController::class, 'coba']);
+Route::get('/', [BookController::class, 'index'])->name('book.index');
+Route::get('/book/datatable', [BookController::class, 'getBooks'])->name('book.datatable');
+Route::get('/book/get', [BookController::class, 'getBook'])->name('book.get');
+Route::post('/book/store', [BookController::class, 'store'])->name('book.store');
+Route::post('/book/update', [BookController::class, 'update'])->name('book.update');
+Route::post('/book/destroy', [BookController::class, 'destroy'])->name('book.destroy');
 
-Route::post('/addBook', [BookController::class, 'store']);
-Route::post('/editBook', [BookController::class, 'update']);
-Route::post('/deleteBook', [BookController::class, 'destroy']);
+Route::get('/group/add/index', [GroupController::class, 'index'])->name('group.add.index');
+Route::get('/group/index', [GroupController::class, 'viewGroup'])->name('group.index');
+Route::get('/group/datatable', [GroupController::class, 'getGroups'])->name('group.datatable');
+Route::post('/group/get', [GroupController::class, 'getGroupBook'])->name('group.get');
+Route::post('/group/store', [GroupController::class, 'store'])->name('group.store');
+Route::post('/group/edit', [GroupController::class, 'editGroup'])->name('group.update');
+Route::post('/coba', [GroupController::class, 'coba'])->name('coba');
