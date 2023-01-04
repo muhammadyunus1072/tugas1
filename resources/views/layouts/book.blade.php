@@ -91,7 +91,16 @@
               { data: "id" },
               { data: "title" },
               { data: "description" },
-              { data: "action" },
+              { 
+                  data: null,
+                  searchable:false,
+                  orderable:false,
+                  render:(item) => {
+                    let action = ` <button type="button" class="btn btn-danger btnDelete" data-id="${item.id}">delete</button>
+                    <button type="button" class="btn btn-warning btnShowModalEdit" data-id="${item.id}" data-title="${item.title}" data-description="${item.description}">edit</button>`
+                    return action;
+                  }
+                },
           ],
           columnDefs: [
               {
@@ -104,7 +113,6 @@
       table
           .on("order.dt search.dt", function () {
               let i = 1;
-
               table
                   .cells(null, 0, { search: "applied", order: "applied" })
                   .every(function (cell) {
@@ -203,11 +211,9 @@
               age: "21",
           },
           (data) => {
-              console.log(data);
           }
       );
   }
-  coba();
 
     </script>
 @endsection

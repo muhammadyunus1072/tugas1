@@ -4,7 +4,7 @@
 
 <section class="m-5">
     <h1>Group</h1>
-    <a class="btn btn-warning my-3 btn-lg" href="editGroup">Edit Book</a>
+    <a class="btn btn-warning my-3 btn-lg" href="{{ route('group.index') }}">Edit Book</a>
     
     <label for="title" class="form-label d-block">Title</label>
     <div class="input-group mb-3">

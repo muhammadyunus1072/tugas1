@@ -13,15 +13,6 @@ class BookController extends Controller
     {
         $data = Book::select('id', 'title', 'description')->orderBy('id')->get();
         return Datatables::of($data)->addIndexColumn()
-            ->addColumn('action', function ($row) {
-                $btn = ' <button type="button" class="btn btn-danger btnDelete" data-id="' . $row->id . '">delete</button>
-                <button type="button" class="btn btn-warning btnShowModalEdit" data-id="' . $row->id . '" data-title="' . $row->title . '" data-description="' . $row->description . '">edit</button>
-           ';
-                return $btn;
-                // $btn = '<a href="javascript:void(0)" class="btn btn-primary btn-sm">'.$row->title.'</a>';
-                //             return $btn;
-            })
-            ->rawColumns(['action'])
             ->make(true);
     }
     public function getBook()

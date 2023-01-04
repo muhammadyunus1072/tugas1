@@ -3,20 +3,21 @@
 @section('content')
 
 <section class="m-5">
-    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal_edit">Edit</button>
-    
-    <table class="table" id="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Description</th>
-            <th scope="col">action</th>
-          </tr>
-        </thead>
-        <tbody id="tbody">
-        </tbody>
-      </table>
+    <a class="btn btn-success" href="{{ route('group.add.index') }}">Add Group</a>
+    <div class="table-responsive">
+        <table class="table" id="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">action</th>
+              </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+        </table>
+    </div>
 
 </section>
 
@@ -166,6 +167,9 @@
             });
         });
     });
+    function deleteList(e) {
+    $(e.target).parent().remove();
+}
     function addList(e) {
         $("#myList").append(content);
     }
